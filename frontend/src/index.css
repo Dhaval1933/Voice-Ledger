@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base Styles ────────────────────────────────────────────────────────────── */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0a0e1a;
+  color: #e2e8f0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0e1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2d3748;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4a5568;
+}
+
+/* ── Glassmorphism Cards ────────────────────────────────────────────────────── */
+
+@layer components {
+  .glass-card {
+    @apply bg-gradient-to-br from-fintech-card/90 to-fintech-surface/70
+           backdrop-blur-xl border border-fintech-border/50
+           rounded-2xl shadow-xl;
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300
+           hover:border-fintech-accent/30 hover:shadow-2xl
+           hover:shadow-fintech-accent/5;
+  }
+
+  /* ── KPI Card Styles ──────────────────────────────────────────────────────── */
+
+  .kpi-card {
+    @apply glass-card p-5 relative overflow-hidden;
+  }
+
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 999px;
+  }
+
+  .kpi-card-green::before {
+    background: linear-gradient(90deg, #10b981, #34d399);
+  }
+
+  .kpi-card-purple::before {
+    background: linear-gradient(90deg, #8b5cf6, #a78bfa);
+  }
+
+  .kpi-card-blue::before {
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  }
+
+  .kpi-card-orange::before {
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  }
+
+  /* ── Financial Amount Display ─────────────────────────────────────────────── */
+
+  .amount-display {
+    @apply font-bold tracking-tight;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .amount-lg {
+    @apply text-2xl sm:text-3xl font-extrabold;
+  }
+
+  .amount-xl {
+    @apply text-3xl sm:text-4xl font-black;
+  }
+
+  /* ── Button Styles ────────────────────────────────────────────────────────── */
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-fintech-accent to-indigo-600
+           text-white font-semibold py-3 px-6 rounded-xl
+           shadow-lg shadow-fintech-accent/25
+           hover:shadow-xl hover:shadow-fintech-accent/30
+           active:scale-[0.98] transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100;
+  }
+
+  .btn-success {
+    @apply bg-gradient-to-r from-emerald-600 to-emerald-500
+           text-white font-semibold py-3 px-6 rounded-xl
+           shadow-lg shadow-emerald-500/25
+           hover:shadow-xl hover:shadow-emerald-500/30
+           active:scale-[0.98] transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-danger {
+    @apply bg-gradient-to-r from-red-600 to-red-500
+           text-white font-semibold py-3 px-6 rounded-xl
+           shadow-lg shadow-red-500/25
+           hover:shadow-xl hover:shadow-red-500/30
+           active:scale-[0.98] transition-all duration-200;
+  }
+
+  .btn-ghost {
+    @apply bg-fintech-surface/50 text-gray-300
+           font-medium py-2.5 px-5 rounded-xl
+           border border-fintech-border/50
+           hover:bg-fintech-surface hover:text-white
+           active:scale-[0.98] transition-all duration-200;
+  }
+
+  /* ── Badge Styles ─────────────────────────────────────────────────────────── */
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full
+           text-xs font-semibold uppercase tracking-wider;
+  }
+
+  .badge-success {
+    @apply badge bg-emerald-500/15 text-emerald-400 border border-emerald-500/20;
+  }
+
+  .badge-warning {
+    @apply badge bg-amber-500/15 text-amber-400 border border-amber-500/20;
+  }
+
+  .badge-danger {
+    @apply badge bg-red-500/15 text-red-400 border border-red-500/20;
+  }
+
+  .badge-info {
+    @apply badge bg-blue-500/15 text-blue-400 border border-blue-500/20;
+  }
+
+  /* ── Recording Button ─────────────────────────────────────────────────────── */
+
+  .mic-button {
+    @apply w-20 h-20 sm:w-24 sm:h-24 rounded-full
+           flex items-center justify-center
+           transition-all duration-300 cursor-pointer
+           active:scale-95;
+  }
+
+  .mic-idle {
+    @apply mic-button
+           bg-gradient-to-br from-fintech-accent to-indigo-700
+           shadow-lg shadow-fintech-accent/30
+           hover:shadow-xl hover:shadow-fintech-accent/40;
+  }
+
+  .mic-recording {
+    @apply mic-button
+           bg-gradient-to-br from-red-500 to-red-700
+           shadow-lg shadow-red-500/40
+           animate-pulse-ring;
+  }
+
+  .mic-processing {
+    @apply mic-button
+           bg-gradient-to-br from-amber-500 to-orange-600
+           shadow-lg shadow-amber-500/30
+           cursor-wait;
+  }
+
+  /* ── Input Styles ─────────────────────────────────────────────────────────── */
+
+  .input-field {
+    @apply w-full bg-fintech-bg/50 border border-fintech-border/50
+           rounded-xl px-4 py-3 text-white placeholder-gray-500
+           focus:outline-none focus:border-fintech-accent/50
+           focus:ring-2 focus:ring-fintech-accent/20
+           transition-all duration-200;
+  }
+
+  /* ── Status Indicator ─────────────────────────────────────────────────────── */
+
+  .status-dot {
+    @apply w-2 h-2 rounded-full;
+  }
+
+  .status-dot-online {
+    @apply status-dot bg-emerald-400 animate-pulse;
+  }
+
+  .status-dot-offline {
+    @apply status-dot bg-red-400;
+  }
+}
+
+/* ── Animations ─────────────────────────────────────────────────────────────── */
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
