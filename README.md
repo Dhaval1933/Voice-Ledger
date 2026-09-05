@@ -226,6 +226,3 @@ voice-ledger/
 - Add multi-merchant support
 - Integrate real-time websockets for live updates
 
-## 📄 License
-
-MIT
